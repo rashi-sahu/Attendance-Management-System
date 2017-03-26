@@ -70,7 +70,14 @@
          }
 
          else{
-         
+          if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo '<script language="javascript">';
+            echo 'alert("Email Format is not valid")';
+            echo '</script>';
+       
+    }
+         else{
+          if(preg_match('/^\d{10}$/',$mobile)){
            for($i=0;$i<sizeof($courses); $i++){
                $qry="INSERT into addInstructor VALUES('$name','$email','$mobile','$date','$gender','$id','$password','$courses[$i]')";
                $result=mysqli_query($conn,$qry) or die;
@@ -81,6 +88,16 @@
             
                }
             }
+          }
+            else{
+          
+      echo '<script language="javascript">';
+            echo 'alert("Enter 10 digit mobile number")';
+            echo '</script>';
+       
+    }
+
+        }
          }
       }
 
@@ -106,7 +123,7 @@
 
 //---------------------------------------------------------------------------------------------------------------
       public function admin_view_instructor($conn, $myArray ,$var1){
-         echo "$var1";
+        
           $qry1 = "select * from addInstructor where Icourse='$var1'";
           $qry2= mysqli_query($conn,$qry1) or die("not fire");
           $i=1;
@@ -147,6 +164,18 @@
 
 
         else{
+
+          if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo '<script language="javascript">';
+            echo 'alert("Email Format is not valid")';
+            echo '</script>';
+       
+    }
+
+
+    else{
+        if(preg_match('/^\d{10}$/',$mobile)){
+
          $qry1="INSERT into addStudent VALUES('$name','$email','$mobile','$roll','$guard_name','$guard_email','$guard_mobile','$password','$date','$semester','$gender','$Scourses')";
          $result=mysqli_query($conn,$qry1) or die("not");
 
@@ -155,11 +184,18 @@
                echo 'alert("Registration Successful")';
                echo '</script>';
             
-               }
-}
-      
+                    }
+        }
+
+        else{
+      echo '<script language="javascript">';
+            echo 'alert("Enter 10 digit mobile number")';
+            echo '</script>';
+    }
 
       }
+          }
+    }
       public function admin_delete_student($conn,$roll){
          $d2 = "select * from addStudent where Sroll_no= '$roll'";
          $result2=mysqli_query($conn,$d2) or die("not fire one");
@@ -170,6 +206,13 @@
          $d1 = "delete from addStudent where Sroll_no='$roll'";
 
          $result1=mysqli_query($conn,$d1) or die("not fire two");
+         if($result1){
+               echo '<script language="javascript">';
+               echo 'alert("Student Delete")';
+               echo '</script>';
+            
+                    }
+
         //ALTER TABLE tbl_Country DROP COLUMN IsDeleted;
          $size1=sizeof($array_of_courseId);
          
@@ -179,7 +222,9 @@
          $d3 = "ALTER TABLE $array_of_courseId[$i] DROP COLUMN $roll";
          $result3=mysqli_query($conn,$d3) or die("not fire three");
          }
-         }   
+         } 
+
+
       }
       public function admin_view_student($conn,$myArray,$var1){
  

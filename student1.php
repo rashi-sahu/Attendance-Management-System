@@ -11,7 +11,7 @@
 
   if(!isset($_SESSION['login_stud']) || $_SESSION['login_stud']==false){
 
-    header("location:student.php");
+    header("location:admin.php");
 
   }
 
@@ -39,12 +39,17 @@
 
     $result1 = mysqli_num_rows($res);
 
-    
+    $courses1 = $_POST['xcourses1'];
 
-    if($result1!=0){
+     if(sizeof($courses1)!=0) {
+    if($result1!=0 ){
 
 
 
+
+      
+
+      
       $newName=$_SESSION['name'];
 
       $newEmail=$_SESSION['email'];
@@ -93,9 +98,10 @@
 
 
 
-        $courses1 = $_POST['xcourses1'];
+     //  $courses1 = $_POST['xcourses1'];
 
       for($i=0; $i<sizeof($courses1);$i++){
+       
 
 
 
@@ -121,8 +127,27 @@
 
     }
 
+
+  
+
+  // else{
+
+  //   echo '<script language="javascript">';
+  //              echo 'alert("Select atleast one course")';
+  //              echo '</script>';
+  // }
+
+
   }
 
+
+}
+
+else{
+  echo '<script language="javascript">';
+               echo 'alert("Select atleast one course")';
+               echo '</script>';
+}
 }
 
 

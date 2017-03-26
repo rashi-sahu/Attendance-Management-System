@@ -1,37 +1,26 @@
 
 
 <?php
-
+session_start();
 include_once('class_admin.php');
 
   $conn=mysqli_connect("localhost","root","","attendance") or die;
 
-if(!isset($_SESSION['login']) || $_SESSION['login']==false){
-    header("location:admin.php");
-  }
+ if(!isset($_SESSION['login']) || $_SESSION['login']==false){
+      header("location:admin.php");
+   }
 
 
 
 if(isset($_POST['submitD'])){
 
-
-
 	$id=$_POST['iid'];
-
-
 
   $object = new admin();
 
   $object->admin_delete_instructor($id);
 
-	
-
 }
-
-
-
-
-
 
 
 ?>
@@ -122,8 +111,6 @@ if(isset($_POST['submitD'])){
 <input type="submit" name="submitD" value="Delete"/><br/>
 
 </form>
-
-
 
 </body>
 

@@ -10,17 +10,37 @@
     $password=$_POST['xpass'];
   
 
-    $qry="SELECT * from add_admin where amobile='$mobile'";
+    $qry="SELECT * from add_admin where amobile='$mobile' or aemail='$email'";
     $res=mysqli_query($conn,$qry) or die("not fire1");
     if (mysqli_affected_rows($conn)>=1){
       $xlogm="<p style='color:red;'>User Already Registered</p>";
     }
     else{
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo '<script language="javascript">';
+            echo 'alert("Email Format is not valid")';
+            echo '</script>';
+       
+      }
+    else{
+
+      if(preg_match('/^\d{10}$/',$mobile)){
       $qry="INSERT into add_admin VALUES('$name','$email','$mobile','$password')";
       $result=mysqli_query($conn,$qry) or die;
       if($result){
         $xlogm="<p style='color:green;''>Registration Successfull</p>";
       }
+    }
+
+    else{
+      echo '<script language="javascript">';
+            echo 'alert("Enter 10 digit mobile number")';
+            echo '</script>';
+    }
+
+
+
+    }
     }
   }
 
@@ -95,7 +115,9 @@
   <div class="col l5"style="margin-top:10px;border-left:2px solid black;">
     <h4>Sign Up</h4>
     <table class="table table-responsive">
-      <?php if(!empty($xlogm)) echo $xlogm; ?>
+      <?php if(!empty($xlogm)) echo $xlogm;
+      ?>
+
       <form name="form2" action="" method="post" onsubmit="return funValidate2()">
         <tr><td><label>Name</label></td>
           <td><input type="text" name="xname"></td></tr>

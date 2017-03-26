@@ -164,7 +164,7 @@ $admin=new admin;
 
       $_SESSION['d']=$myArray[$b-2];
 
-      echo $_SESSION['d'];
+      //echo $_SESSION['d'];
 
      header("location:update_instructor.php");
 

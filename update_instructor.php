@@ -31,11 +31,6 @@ if(!isset($_SESSION['login']) || $_SESSION['login']==false){
   else $flag=1;
 
 
-
-  
-
-
-
   if(isset($_POST['Ireg'])){
 
     $name=$_POST['Iname'];
@@ -67,12 +62,6 @@ if(!isset($_SESSION['login']) || $_SESSION['login']==false){
 
 
   }
-
- 
-
-
-
-
 
 ?>
 
