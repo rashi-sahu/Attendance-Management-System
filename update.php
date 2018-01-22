@@ -113,7 +113,7 @@ $res= mysqli_query($conn,$sql) or die("qry not fired!");
 
       
 
-<nav   <li><a href="student1.php">Profile</a></li>>
+<nav style="background-color: #540c94">
 
   <div class="nav-wrapper">
 
@@ -130,7 +130,7 @@ $res= mysqli_query($conn,$sql) or die("qry not fired!");
 
       <!-- Dropdown Trigger -->
 
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+      
 
     </ul>
 

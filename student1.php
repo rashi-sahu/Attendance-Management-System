@@ -19,7 +19,7 @@
 
   
 
-  
+  $newMobile=$_SESSION['mobile'];
 
   if(isset($_POST['Ssub'])){
 
@@ -31,7 +31,7 @@
 
 
 
-    $newMobile=$_SESSION['mobile'];
+    
 
     $qry="SELECT * from addStudent where Smobile='$newMobile'";
 
@@ -335,11 +335,20 @@ Welcome Student
 
 <form method="POST">
 
+        <?php
+        $qry9 = "select * from addStudent where Smobile = '$newMobile'";
+        $res9=mysqli_query($conn,$qry9) or die("not fire1");
+        if(mysqli_affected_rows($conn)>=1){
+          $row=mysqli_fetch_array($res9) or die("not fire2");
+          $lucky=$row[11];
+         
 
+          if($lucky==''){
+            
 
-        <select name="xcourses1[ ]" multiple="multiple" style="margin-top: 50px; margin-left: 150px;">
+        echo "<select name='xcourses1[ ]' multiple='multiple' style='margin-top: 50px; margin-left: 150px;'>";
 
-           <?php
+           
 
         $qry1 = "select * from add_course";
 
@@ -355,11 +364,13 @@ Welcome Student
 
         }
 
+     
+
         
 
-      ?>
+      
 
-        </select>
+        echo "</select>";
 
       
 
@@ -367,7 +378,12 @@ Welcome Student
 
 
 
-        <input type="submit" value="SUBMIT" name="Ssub">
+        echo "<input type='submit' value='SUBMIT' name='Ssub'>";
+
+      }
+    }
+
+        ?>
 
 
 

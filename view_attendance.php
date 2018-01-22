@@ -203,7 +203,7 @@ if(!isset($_SESSION['login_inst']) || $_SESSION['login_inst']==false){
   <div class="nav-wrapper">
 
    
-
+<a href="#!" class="brand-logo">WELCOME INSTRUCTOR</a>
     <ul class="right hide-on-med-and-down">
 
       <li><a href="instructor1.php">Profile</a></li>
@@ -355,10 +355,10 @@ if(!isset($_SESSION['login_inst']) || $_SESSION['login_inst']==false){
 
 
 <form method="post">
-<button id ="myButton1" name="Smail" style="margin-top: 50px; margin-left: 660px;">Sent Mail</button>
+<button id ="myButton1" name="Smail" style="margin-top: 50px; margin-left: 600px;">Sent Mail</button>
 
 </form>
-<button id ="myButton" style="margin-top: 50px; margin-left: 600px;">Click Here to download Excel Sheet</button>
+<button id ="myButton" style="margin-top: 50px; margin-left: 510px;">Click Here to download Excel Sheet</button>
 
 </body>
 

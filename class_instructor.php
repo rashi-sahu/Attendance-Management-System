@@ -1,8 +1,9 @@
 <?php 
 
 
-
+  
 	class instructor {
+
 
       /* Member variables */
 
@@ -47,9 +48,24 @@
 	      $_SESSION['password']=$row[6];
 
 	      $_SESSION['login_inst']=true;
+        if (strcmp($password, $_SESSION['password'])==0){
 
 	      header("location:instructor1.php");
+      }
 
+      else {
+
+        echo '<script language="javascript">';
+
+
+
+        echo 'alert("Invalid Credentital")';
+
+
+
+        echo '</script>';
+
+      }
     	}
 
     	else {
@@ -303,7 +319,7 @@
 
 
 
-
+              $per=0;
               if($total_class>0){
 
 
@@ -313,6 +329,7 @@
 
 
               $per=round($Percentage,2);
+
 
               if($per>=85.00)
 
@@ -332,7 +349,7 @@
 
               }
 
-
+              
 
               else{
 

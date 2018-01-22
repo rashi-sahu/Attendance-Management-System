@@ -203,7 +203,7 @@ if(!isset($_SESSION['login_inst']) || $_SESSION['login_inst']==false){
     <ul class="right hide-on-med-and-down">
 
       <li><a href="student1.php">Profile</a></li>
-      <li><a href="student_view_attenadnce_list.php">Add Attendance</a></li>
+      <li><a href="student_view_attenadnce_list.php">View Attendance</a></li>
 
       
 

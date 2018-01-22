@@ -2,6 +2,7 @@
    
 	class admin {
       /* Member variables */
+     
       private $name;
       private $email;
       private $mobile;
@@ -34,7 +35,8 @@
 //-------------------------------------------------------------------------------------------------------------
       public function admin_login($mobile , $password){
            $conn=mysqli_connect("localhost","root","","attendance") or die;
-         $qry="SELECT * from add_admin where amobile='$mobile' and apassword='$password'";
+         $qry="SELECT * from add_admin where amobile='$mobile' ";
+
          $res=mysqli_query($conn,$qry) or die("not fire1");
          if (mysqli_affected_rows($conn)>=1){
             $row=mysqli_fetch_array($res) or die("not fire2");
@@ -43,7 +45,15 @@
                $_SESSION['mobile']=$row[2];
                $_SESSION['password']=$row[3];
                $_SESSION['login']=true;
+               if (strcmp($password, $_SESSION['password'])==0){
                header("location:admin1.php");
+             }
+
+             else {
+            echo '<script language="javascript">';
+            echo 'alert("Invalid Credentital")';
+            echo '</script>';
+         }
     }
          else {
             echo '<script language="javascript">';
@@ -59,6 +69,16 @@
 //------------------------------------------------------------------------------------------------------------
       public function admin_add_instructor($name, $email, $mobile, $date, $gender, $id, $password, $courses){
            $conn=mysqli_connect("localhost","root","","attendance") or die;
+
+           
+           $date1=date("Y-m-d");
+           $date2=date_create($date);
+           $date4=date_format($date2,"Y-m-d");
+           $date5=new DateTime($date4);
+           //$date3=date_create($date1);
+           $date3=new DateTime($date1);
+
+
 
          $qry="SELECT * from addInstructor where Imobile='$mobile' or Iemail='$email' or Iid='$id'";
          $res=mysqli_query($conn,$qry) or die("not fire1");
@@ -77,14 +97,27 @@
        
     }
          else{
-          if(preg_match('/^\d{10}$/',$mobile)){
+          $d=date_diff($date3,$date5);
+          $d1=$d->format("%R%a");
+          $diff=(int)$d1;
+
+          if(preg_match('/^\d{10}$/',$mobile ) and ($diff<0)){
            for($i=0;$i<sizeof($courses); $i++){
                $qry="INSERT into addInstructor VALUES('$name','$email','$mobile','$date','$gender','$id','$password','$courses[$i]')";
                $result=mysqli_query($conn,$qry) or die;
+               $qry2="delete from add_course_delete where cid = '$courses[$i]'";
+               $result2=mysqli_query($conn,$qry2) or die;
                if($result){
                echo '<script language="javascript">';
                echo 'alert("Registration Successful")';
                echo '</script>';
+
+               header("Location:admin1_addFaculty.php");
+               
+               //header("Refresh:0");
+               
+
+
             
                }
             }
@@ -92,7 +125,7 @@
             else{
           
       echo '<script language="javascript">';
-            echo 'alert("Enter 10 digit mobile number")';
+            echo 'alert("Enter 10 digit mobile number or vaild date of birth")';
             echo '</script>';
        
     }
@@ -104,17 +137,65 @@
 //--------------------------------------------------------------------------------------------------------------
       public function admin_delete_instructor($id){
            $conn=mysqli_connect("localhost","root","","attendance") or die;
+           $array_of_courses=array();
+           
+
+           $d2="select * from addInstructor where Iid = '$id'";
+           $result2=mysqli_query($conn,$d2) or die("1");
+           while($result3=mysqli_fetch_array($result2)){
+            $a=$result3['Icourse'];
+            
+            array_push($array_of_courses, $a);
+
+           }
+
+           print_r($array_of_courses);
+
+
+           $array_of_courses1=array();
+           for($i=0;$i<sizeof($array_of_courses); $i++){
+              $d3="select * from add_course where Cid='$array_of_courses[$i]' ";
+              $result4=mysqli_query($conn,$d3) or die("2");
+           while($result5=mysqli_fetch_array($result4)){
+            $b=$result5['Ccourse_name'];
+            
+            array_push($array_of_courses1, $b);
+
+           }
+         }
+
+         print_r($array_of_courses1);
+
+
+
+
+          for($i=0;$i<sizeof($array_of_courses); $i++){
+
+            $qry7="INSERT into add_course_delete VALUES('$array_of_courses[$i]','$array_of_courses1[$i]')";
+               $result7=mysqli_query($conn,$qry7) or die("3");
+
+          }
+
+              
+
+
+
+
+
+
+
          $d1 = "delete from addInstructor where Iid = '$id'";
 
+         $result=mysqli_query($conn,$d1) or die("4");
 
-         if(mysqli_query($conn,$d1)){
+         if (mysqli_affected_rows($conn)>=1){
             echo '<script language="javascript">';
             echo 'alert("Successfully Deleted")';
             echo '</script>';
          }
          else{
             echo '<script language="javascript">';
-            echo 'alert("Not Deleted")';
+            echo 'alert("No Id is exist")';
             echo '</script>';
          }
 
@@ -130,6 +211,7 @@
           $var="";
           while($result=mysqli_fetch_array($qry2)){
               $i++;
+              $mm=$i-1;
               $a=$result['Iname'];
               $b=$result['Iemail'];
               $c=$result['Imobile'];
@@ -137,7 +219,7 @@
               $e=$result['Igender'];
               $f=$result['Iid'];
               //echo $a;
-              $temp="<tr><td>$i</td><td>$a</td><td>$b</td><td>$c</td><td>$d</td><td>$e</td><td>$f</td>";
+              $temp="<tr><td>$mm</td><td>$a</td><td>$b</td><td>$c</td><td>$d</td><td>$e</td><td>$f</td>";
               echo $temp;
               array_push($myArray, $f);
               $button="<td><input type='submit' value='Update' name='$i'></td></tr>";
@@ -174,7 +256,7 @@
 
 
     else{
-        if(preg_match('/^\d{10}$/',$mobile)){
+        if(preg_match('/^\d{10}$/',$mobile) and substr($roll,0,3)=="B15"){
 
          $qry1="INSERT into addStudent VALUES('$name','$email','$mobile','$roll','$guard_name','$guard_email','$guard_mobile','$password','$date','$semester','$gender','$Scourses')";
          $result=mysqli_query($conn,$qry1) or die("not");
@@ -183,13 +265,16 @@
                echo '<script language="javascript">';
                echo 'alert("Registration Successful")';
                echo '</script>';
+               header("Location:admin1_addStudent.php");
+
+
             
                     }
         }
 
         else{
       echo '<script language="javascript">';
-            echo 'alert("Enter 10 digit mobile number")';
+            echo 'alert("Enter 10 digit mobile number or enter roll no. in form of B15....")';
             echo '</script>';
     }
 
@@ -206,12 +291,20 @@
          $d1 = "delete from addStudent where Sroll_no='$roll'";
 
          $result1=mysqli_query($conn,$d1) or die("not fire two");
-         if($result1){
-               echo '<script language="javascript">';
-               echo 'alert("Student Delete")';
-               echo '</script>';
-            
-                    }
+         
+
+
+         if (mysqli_affected_rows($conn)>=1)
+         {
+            echo '<script language="javascript">';
+            echo 'alert("Successfully Deleted")';
+            echo '</script>';
+         }
+         else{
+            echo '<script language="javascript">';
+            echo 'alert("No Such Roll no. is exist")';
+            echo '</script>';
+         }
 
         //ALTER TABLE tbl_Country DROP COLUMN IsDeleted;
          $size1=sizeof($array_of_courseId);
@@ -274,10 +367,14 @@
       echo '</script>';
     }
     else{
+
+      if(!preg_match('/[^A-Za-z0-9]/', $course)){
     
     
       $qry="INSERT into add_course VALUES('$id','$course')";
       $result1=mysqli_query($conn,$qry) or die;
+      $qry8="INSERT into add_course_delete VALUES('$id','$course')";
+      $result8=mysqli_query($conn,$qry8) or die;
       if($result1){
         echo '<script language="javascript">';
         echo 'alert("course have Registered")';
@@ -286,7 +383,15 @@
 
       $qry1="CREATE TABLE ".$id." (xdate VARCHAR(40))";
       
-      $res1=mysqli_query($conn,$qry1) or die("not fire1");
+      $res1=mysqli_query($conn,$qry1) or die("not connected");
+    }
+
+    else{
+      echo '<script language="javascript">';
+        echo 'alert("Enter vaild course name")';
+        echo '</script>';
+
+    }
     }
 
       }
@@ -296,6 +401,8 @@
        public function admin_delete_course($conn,$iid){
          $d2 = "delete from add_course where Cid = '$iid'";
            $result2=mysqli_query($conn,$d2) or die;
+           $d6 = "delete from add_course_delete where cid = '$iid'";
+           $result6=mysqli_query($conn,$d6) or die;
            if (mysqli_affected_rows($conn)>=1){
            $d3 = "delete from addStudent where Scourses = '$iid'";
            $result3=mysqli_query($conn,$d3) or die;

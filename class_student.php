@@ -56,10 +56,16 @@
       $_SESSION['gender']=$row[10];
 
       $_SESSION['login_stud']=true;
+      if (strcmp($password, $_SESSION['password'])==0){
 
       header("location:student1.php");
 
-      
+      }
+      else {
+            echo '<script language="javascript">';
+            echo 'alert("Invalid Credentital")';
+            echo '</script>';
+    }
 
     }
 

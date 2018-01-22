@@ -2,9 +2,11 @@
 
 <?php
 
+session_start();
+
 include_once("class_admin.php");
 
-session_start();
+
 
 
 

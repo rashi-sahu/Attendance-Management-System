@@ -61,7 +61,7 @@ $res= mysqli_query($conn,$sql) or die("qry not fired!");
 
 <nav style="background-color: #540c94">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">ATTENDANCE MANAGMENT SYSTEM</a>
+    <a href="#!" class="brand-logo">WELCOME INSTRUCTOR</a>
     <ul class="right hide-on-med-and-down">
       <li><a href="instructor1.php">Profile</a></li>
       <li><a href="add_attendance.php">Add Attendance</a></li>

@@ -180,15 +180,15 @@ $('.datepicker').pickadate({
     <div class="col l6">
     <table >
 
-    <tr><td>Name</td><td><input type="text" name="iname"></td></tr>
+    <tr><td>Name</td><td><input type="text" name="iname" value="<?php if(isset($name)) echo $name ?>"></td></tr>
 
-    <tr><td>Email</td><td><input type="text" name="iemail"></td></tr>
+    <tr><td>Email</td><td><input type="text" name="iemail" value="<?php if(isset($email)) echo $email ?>"></td></tr>
 
-    <tr><td>Mobile</td><td><input type="text" name="imob"></td></tr>
+    <tr><td>Mobile</td><td><input type="text" name="imob" value="<?php if(isset($mobile)) echo $mobile ?>"></td></tr>
 
-    <tr><td>ID</td><td><input type="text" name="iid"></td></tr>
+    <tr><td>ID</td><td><input type="text" name="iid" value="<?php if(isset($id)) echo $id ?>"></td></tr>
 
-    <tr><td>Password</td><td><input type="password" name="ipass"></td></tr>
+    <tr><td>Password</td><td><input type="password" name="ipass" value="<?php if(isset($password)) echo $password ?>"></td></tr>
 
 
 
@@ -196,7 +196,7 @@ $('.datepicker').pickadate({
 
     <tr><td>Date Of Birth</td>
 
-          <td><input type="date" class="datepicker" name="idate"></td></tr>
+          <td><input type="date" class="datepicker" name="idate" value="<?php if(isset($date)) echo $date ?>"></td></tr>
 
 
 
@@ -230,15 +230,15 @@ $('.datepicker').pickadate({
 
            <?php
 
-        $qry1 = "select * from add_course";
+        $qry1 = "select * from add_course_delete";
 
         $res= mysqli_query($conn,$qry1);
 
         while($arr=mysqli_fetch_array($res)){
 
-          $var1=$arr['Cid'];
+          $var1=$arr['cid'];
 
-          $var2=$arr['Ccourse_name'];
+          $var2=$arr['ccourse_name'];
 
           echo "<option value='".$var1."'>".$var2."</option>";
 

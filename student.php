@@ -108,7 +108,7 @@ if (isset($_POST['slog'])){
 
   <div class="col-lg-5" style="margin-top:10px;">
 
-    <h4>Login Here</h4>
+    <h4>Student Login</h4>
 
     
 

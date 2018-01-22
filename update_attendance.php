@@ -12,7 +12,6 @@ session_start();
   }
 
 $var= $_GET['course'];
-echo $var;
 
 
 $sql=mysqli_query($conn,"select * from addStudent where Scourses='$var'");
@@ -85,7 +84,7 @@ padding:0;margin-right:95px;}
 
 header li a{
 
-float:right;}
+float:left;}
 
 header li a{
 
@@ -103,7 +102,9 @@ header li a{
 
 }
 
-
+#button {
+    margin-top: 400px;
+}
 </style>
 
 <body>
@@ -118,13 +119,12 @@ header li a{
 
 <tr>
 
-<td><h1>
+<td width="55%"><h1>
 
-ATTENDANCE MANAGMENT SYSTEM
-
+WELCOME INSTRUCTOR
 </h1></td>
 
-<td><ul>
+<td width="45%"><ul>
 
 	<li><a href="instructor1.php">Profile</a></li>
       <li><a href="add_attendance.php">Add Attendance</a></li>
@@ -199,7 +199,7 @@ $i=$i+1;
 
 </table>
 
-<input type="submit" value="Update Attendance" name="submitattend" />
+<input type="submit" value="Update Attendance" name="submitattend" style="margin-top:50px; margin-left:500px;"/>
 
 </form>
 
@@ -229,7 +229,7 @@ if(isset($_POST['submitattend']))
 	
 			$value=$_POST['value'.$i];
 
-			echo "$value";
+			
 			$c1=$stud[$i];
 
 $object = new instructor();

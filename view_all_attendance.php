@@ -127,6 +127,7 @@ if(!isset($_SESSION['login_inst']) || $_SESSION['login_inst']==false){
 <nav style="background-color: #540c94">
 
   <div class="nav-wrapper">
+  <a href="#!" class="brand-logo">WELCOME INSTRUCTOR</a></a>
 
 
     <ul class="right hide-on-med-and-down">

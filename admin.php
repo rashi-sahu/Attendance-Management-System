@@ -3,6 +3,8 @@
   include_once('class_admin.php');
     $conn=mysqli_connect("localhost","root","","attendance") or die;
 
+  $fla=0;
+
   if(isset($_POST['xreg'])){
     $name=$_POST['xname'];
     $email=$_POST['xemail'];
@@ -26,6 +28,8 @@
 
       if(preg_match('/^\d{10}$/',$mobile)){
       $qry="INSERT into add_admin VALUES('$name','$email','$mobile','$password')";
+     // header("Location:admin.php");
+      header("Refresh:0");
       $result=mysqli_query($conn,$qry) or die;
       if($result){
         $xlogm="<p style='color:green;''>Registration Successfull</p>";
@@ -82,7 +86,7 @@
  
 <nav style="background-color: #540c94">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">ATTENDANCE MANAGMENT SYSTEM</a>
+    <a href="#!" class="brand-logo">ATTENDANCE MANAGEMENT SYSTEM</a>
     <ul class="right hide-on-med-and-down">
       <li><a href="attendance.php">Home</a></li>
       <li><a href="admin.php">Admin</a></li>
@@ -100,14 +104,14 @@
   <div class="row">
   <div class="col l1"></div>
   <div class="col l5" style="margin-top:10px;">
-    <h4>Login Here</h4>
+    <h4>Admin Login</h4>
     
     <table class="table table-responsive">
       <form name="form1" action="" method="post" onsubmit="funValidate1()">
         <tr><td><label>Mobile</label></td>
-        <td><input type="text" name="xmob"></td></tr>
+        <td><input type="text" name="xmob" value="<?php if(isset($mobile) and isset($_POST['xlog']) ) echo $mobile ?>" ></td></tr>
         <tr><td><label>Password</label></td>
-        <td><input type="password" name="xpass"></td></tr>
+        <td><input type="password" name="xpass" value="<?php if(isset($password) and isset($_POST['xlog'])) echo $password ?>"></td></tr>
         <tr><td></td><td><button class = "btn btn-primary" type="submit" name="xlog" onMouseover("this.style.backgroundColor='red';return true;" )>Login</button></td></tr>
       </form>
     </table>
@@ -120,13 +124,13 @@
 
       <form name="form2" action="" method="post" onsubmit="return funValidate2()">
         <tr><td><label>Name</label></td>
-          <td><input type="text" name="xname"></td></tr>
+          <td><input type="text" name="xname" value="<?php if(isset($name)and isset($_POST['xreg']) ) echo $name ?>"></td></tr>
         <tr><td><label>E-Mail</label></td>
-          <td><input type="text" name="xemail"></td></tr>
+          <td><input type="text" name="xemail" value="<?php if(isset($email) and isset($_POST['xreg'])) echo $email ?>"></td></tr>
         <tr><td><label>Mobile</label></td>
-          <td><input type="text" name="xmob"></td></tr>
+          <td><input type="text" name="xmob" value="<?php if(isset($mobile) and isset($_POST['xreg']) ) echo $mobile ?>"></td></tr>
         <tr><td><label>Password</label></td>
-          <td><input type="password" name="xpass"></td></tr>
+          <td><input type="password" name="xpass" value="<?php if(isset($password) and isset($_POST['xreg'])) echo $password ?>"></td></tr>
         <tr><td></td><td><button class = "btn btn-primary"  type="submit" name="xreg">Register Me</button></td></tr>
       </form>
     </table>

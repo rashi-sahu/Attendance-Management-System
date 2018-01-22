@@ -50,7 +50,7 @@
       
 <nav style="background-color: #540c94">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">ATTENDANCE MANAGMENT SYSTEM</a>
+    <a href="#!" class="brand-logo">ATTENDANCE MANAGEMENT SYSTEM</a>
     <ul class="right hide-on-med-and-down">
       <li><a href="attendance.php">Home</a></li>
       <li><a href="admin.php">Admin</a></li>
@@ -60,6 +60,7 @@
     </ul>
   </div>
 </nav>
+
 
 
 

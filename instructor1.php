@@ -65,7 +65,7 @@ include_once('class_instructor.php');
 
   <div class="nav-wrapper">
 
-    <a href="#!" class="brand-logo">ATTENDANCE MANAGMENT SYSTEM </a>
+    <a href="#!" class="brand-logo">WELCOME INSTRUCTOR</a>
 
     <ul class="right hide-on-med-and-down">
 

@@ -56,7 +56,7 @@ if (isset($_POST['ilog'])){
   <div class="container" style="margin-top:150px;">
   <div class="col-lg-1"></div>
   <div class="col-lg-5" style="margin-top:10px;">
-    <h4>Login Here</h4>
+    <h4>Instructor Login</h4>
     
     <table class="table table-responsive">
       <form name="form1" action="" method="post" onsubmit="funValidate1()">

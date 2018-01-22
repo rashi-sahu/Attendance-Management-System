@@ -76,7 +76,7 @@ padding:0;margin-right:95px;}
 
 header li a{
 
-float:right;}
+float:left;}
 
 header li a{
 
@@ -110,13 +110,13 @@ header li a{
 
 <tr>
 
-<td><h1>
+<td width="50%"><h1>
 
-ATTENDANCE
+Welcome Instructor
 
 </h1></td>
 
-<td><ul>
+<td width="50%"><ul>
 
   
 
@@ -209,7 +209,7 @@ ATTENDANCE
 
 
 
-          <input type="submit" name="xsave" value="xsave" >
+          <input type="submit" name="xsave" value="Mark Attendance" style="margin-top:50px; margin-left:500px;" >
 
                 
 
